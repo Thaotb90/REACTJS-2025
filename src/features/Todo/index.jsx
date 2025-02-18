@@ -1,10 +1,7 @@
 // rafce :> react arrow function export component
 // rsfp :> react state function props
 import React from "react";
-import PropTypes from "prop-types";
 import TodoList from "./components/TodoList";
-
-todoFeature.propTypes = {};
 
 const todoList = [
   {
