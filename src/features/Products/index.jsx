@@ -8,7 +8,10 @@ function ProductPage(props) {
   // useEffect để fetch productList 1 lần duy nhất khi component được mount
   useEffect(() => {
     const getProduct = async () => {
-      const fetchProductList = await productsApi.getAll();
+      const params = {
+        limit: 10,
+      };
+      const fetchProductList = await productsApi.getAll(params);
       if (fetchProductList && fetchProductList.products.length > 0) {
         setProductList(fetchProductList.products);
       }

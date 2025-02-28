@@ -1,48 +1,50 @@
 import React from "react";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
+import { Link } from "react-router-dom";
 
 const ProductItem = (props) => {
   const { productData } = props;
-  console.log("detail data: ", productData);
-
   return (
     <>
-      <Card sx={{ minWidth: 275 }}>
-        <CardContent>
+      <Card
+        sx={{
+          minWidth: 275,
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
+        <CardContent sx={{ position: "relative", overflow: "hidden" }}>
+          <img
+            src={productData.thumbnail}
+            alt={productData.title}
+            loading="lazy"
+            style={{
+              width: "100%",
+              height: "120px",
+            }}
+          />
           <Typography
             gutterBottom
             sx={{ color: "text.secondary", fontSize: 14 }}
           >
-            Word of the Day
+            {productData.category}
           </Typography>
           <Typography variant="h5" component="div">
-            be{bull}nev{bull}o{bull}lent
+            {productData.title}
           </Typography>
-          <Typography sx={{ color: "text.secondary", mb: 1.5 }}>
-            adjective
+          <Typography sx={{ color: "text.secondary", fontSize: 14, mb: 1.5 }}>
+            shipping Information:&nbsp;
+            {productData.shippingInformation}
           </Typography>
-          <Typography variant="body2">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
+          <Typography variant="body2">{productData.description}</Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Learn More</Button>
+          <Link to={`/products/${productData.id}`}>View More</Link>
         </CardActions>
       </Card>
     </>

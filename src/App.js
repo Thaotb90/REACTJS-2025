@@ -1,29 +1,30 @@
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
-import productsApi from "./api/productsApi";
 import AlbumFeature from "./features/Album";
-import TodoFeature from "./features/Todo";
 import ProductPage from "./features/Products";
+import ProductDetail from "./features/Products/components/ProductDetail";
+import TodoFeature from "./features/Todo";
+import Header from "./components/Header";
 
 function App() {
   // demo get API:
-  const productList = async () => {
-    // const params = {total: }
-    const getAllProduct = await productsApi.getAll();
-    console.log("test API product: ", getAllProduct);
+  // useEffect(() => {
+  //   const productList = async () => {
+  //     const getAllProduct = await productsApi.getAll();
+  //   };
+  //   productList();
+  // }, []);
 
-    // const get
-  };
-  productList();
   return (
     <div className="App">
-      <TodoFeature />
-      <AlbumFeature />
+      <Header />
       <Routes>
         <Route path="/" element={<ProductPage />}>
           Product
         </Route>
+        <Route path="/products" element={<ProductPage />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/albums" element={<AlbumFeature />}>
           Album
         </Route>
