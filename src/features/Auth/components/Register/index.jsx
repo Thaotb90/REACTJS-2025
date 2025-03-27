@@ -1,10 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
-import RegisterForm from "../RegisterForm";
 import { useDispatch } from "react-redux";
 import { register } from "../../userSlice";
+import RegisterForm from "../RegisterForm";
+import PropTypes from "prop-types";
 
-Register.propTypes = {};
+Register.propTypes = {
+  onRegisterSuccess: PropTypes.func,
+};
 
 function Register(props) {
   const dispatch = useDispatch();
@@ -14,6 +16,13 @@ function Register(props) {
       const action = register(data);
       const resultAction = await dispatch(action);
       console.log("resultAction: ", resultAction);
+
+      if (resultAction.type === register.fulfilled.type) {
+        const { onRegisterSuccess } = props;
+        if (onRegisterSuccess) {
+          onRegisterSuccess();
+        }
+      }
     } catch (err) {
       console.error("Fail to register: ", err);
     }

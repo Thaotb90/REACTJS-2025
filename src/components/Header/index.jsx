@@ -10,29 +10,26 @@
 // }
 
 // export default Header;
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import AppBar from "@mui/material/AppBar";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Toolbar from "@mui/material/Toolbar";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import * as React from "react";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // import for dialog
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import Register from "../../features/Auth/components/Register";
-import { DialogTitle } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
+import AuthDialog from "../../features/Auth/components/AuthDialog";
+
 const pages = [
   { path: "/products", title: "Products" },
   { path: "/todos", title: "Todo" },
@@ -67,6 +64,10 @@ function Header() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleRegisterSuccess = () => {
+    toast.success("Register successfully! Please login.");
   };
 
   return (
@@ -217,41 +218,11 @@ function Header() {
       </AppBar>
 
       {/* Dialog */}
-
-      <Dialog
+      <AuthDialog
         open={open}
         onClose={handleClose}
-        disableEscapeKeyDown
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <CloseIcon
-          onClick={handleClose}
-          sx={{
-            cursor: "pointer",
-            position: "absolute",
-            top: "10px",
-            right: "10px",
-            "&:hover": {
-              color: "#1976d2",
-            },
-          }}
-        />
-        <AdbIcon
-          sx={{
-            display: "flex",
-            color: "#1976d2",
-            mt: 3,
-            mx: "auto",
-          }}
-        />
-        <DialogTitle textAlign={"center"} color="#1976d2">
-          Register
-        </DialogTitle>
-        <DialogContent>
-          <Register />
-        </DialogContent>
-      </Dialog>
+        onRegisterSuccess={handleRegisterSuccess}
+      />
     </>
   );
 }

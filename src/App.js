@@ -1,4 +1,6 @@
-import { Route, Routes } from "react-router-dom";
+import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 import AlbumFeature from "./features/Album";
@@ -6,6 +8,7 @@ import ProductPage from "./features/Products";
 import ProductDetail from "./features/Products/components/ProductDetail";
 import TodoFeature from "./features/Todo";
 import Header from "./components/Header";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   // demo get API:
@@ -32,6 +35,7 @@ function App() {
           Todo
         </Route>
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

@@ -1,29 +1,36 @@
-import { useEffect, useState } from "react";
-import productsApi from "../../api/productsApi";
 import ProductList from "./components/ProductList";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
 
 function ProductPage(props) {
-  const [productList, setProductList] = useState([]);
-
-  // useEffect để fetch productList 1 lần duy nhất khi component được mount
-  useEffect(() => {
-    const getProduct = async () => {
-      const params = {
-        limit: 10,
-      };
-      const fetchProductList = await productsApi.getAll(params);
-      if (fetchProductList && fetchProductList.products.length > 0) {
-        setProductList(fetchProductList.products);
-      }
-    };
-    getProduct();
-  }, []);
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+    ...theme.applyStyles("dark", {
+      backgroundColor: "#1A2027",
+    }),
+  }));
 
   return (
-    <div>
-      <h3 className="product__title">Product page</h3>
-      <ProductList productList={productList} />
-    </div>
+    <Box sx={{ padding: 4 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={4} lg={3}>
+          <Paper>
+            <Item>Sidebar</Item>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={8} lg={9}>
+          <Paper>
+            <ProductList />
+          </Paper>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
 
